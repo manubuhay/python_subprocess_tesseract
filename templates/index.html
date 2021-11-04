@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{%block title%}Upload!{%endblock%}
+{%block main%}
+<!-- <label class="file">
+  <input type="file" id="file" aria-label="File browser example">
+  <span class="file-custom"></span>
+</label> -->
+<form method="POST" enctype="multipart/form-data">
+  <input type="file" name="fileupload" value="fileupload" id="fileupload"><br>
+  <label for="fileupload"> Select a file to upload</label>
+  <input type="submit" value="submit">
+  <input type = "reset" value="Reset">
+</form>
+<div class="msg">{{error}}</div>
+{%endblock%}
