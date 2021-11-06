@@ -32,8 +32,10 @@ def process_upload(filename):
     to_convert=os.path.join(app.config['UPLOAD_DIRECTORY'],filename)
     convert2txt=os.path.join(app.config['OUTPUT_DIRECTORY'],filename)
     # out=subprocess.run([f"tesseract uploads/{filename}"+f" textresult/{filename}"],shell=True,stdout=f1,stderr=f2)
-    # out=subprocess.run(["tesseract %s %s"%(to_convert,convert2txt)],shell=True,stdout=f1,stderr=f2) # Works on Linux systems, comment this if you are using Windows
-    out=subprocess.run(["tesseract",to_convert,convert2txt],shell=True,stdout=f1,stderr=f2) # Works on Windows systems, comment this if you are using Linux
+    if os.name=="nt": # If OS is windows-based-based
+        out=subprocess.run(["tesseract",to_convert,convert2txt],shell=True,stdout=f1,stderr=f2)
+    else: # Else, it might be linux or mac
+        out=subprocess.run(["tesseract %s %s"%(to_convert,convert2txt)],shell=True,stdout=f1,stderr=f2)
     return redirect(url_for("output_file"))
 
 @app.route("/result/",methods=["GET"])
