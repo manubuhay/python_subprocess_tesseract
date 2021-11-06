@@ -34,8 +34,9 @@ def process_upload(filename):
     # out=subprocess.run([f"tesseract uploads/{filename}"+f" textresult/{filename}"],shell=True,stdout=f1,stderr=f2)
     if os.name=="nt": # If OS is windows-based-based
         out=subprocess.run(["tesseract",to_convert,convert2txt],shell=True,stdout=f1,stderr=f2)
-    else: # Else, it might be linux or mac
-        out=subprocess.run(["tesseract %s %s"%(to_convert,convert2txt)],shell=True,stdout=f1,stderr=f2)
+    else: # Else, it might be linux or mac (posix)
+        #out=subprocess.run(["tesseract %s %s"%(to_convert,convert2txt)],shell=True,stdout=f1,stderr=f2)
+        out=subprocess.run(["tesseract",to_convert,convert2txt],stdout=f1,stderr=f2) # Omit 'shell=True' in LINUX/MAC systems
     return redirect(url_for("output_file"))
 
 @app.route("/result/",methods=["GET"])
