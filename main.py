@@ -13,27 +13,26 @@ app.config['EXTENSION']="txt"
 @app.route("/",methods=["POST","GET"])
 def to_upload():
     err_msg=""
-    files_list=[]
+    # files_list=[]
     if request.method=="POST":
         if request.files['fileupload']:
             for f in request.files.getlist("fileupload"):
             # f=request.files['fileupload']
                 file_name=secure_filename(f.filename)
-                files_list.append(file_name)
+                app.config['FILES_LIST'].append(file_name)
                 #app.config['FILE_NAME']=filename
                 # f.save(app.config['UPLOAD_DIRECTORY']+filename)
                 f.save(os.path.join(app.config['UPLOAD_DIRECTORY'],file_name))
-            app.config['FILES_LIST']=files_list
-            return redirect(url_for("process_upload",files_list=files_list))
+            return redirect(url_for("process_upload"))
         else:
-            err_msg="No file selected!"
+            err_msg="No file/s selected!"
     return render_template("index.html",error=err_msg)
 
-@app.route("/upload/<files_list>",methods=["POST","GET"])
-def process_upload(files_list):
+@app.route("/upload/",methods=["GET"])
+def process_upload():
     out_log=open("logs/out.txt","w")
     err_log=open("logs/error.txt","w")
-    for f in files_list:
+    for f in app.config['FILES_LIST']:
         to_convert=os.path.join(app.config['UPLOAD_DIRECTORY'],f)
         convert2txt=os.path.join(app.config['OUTPUT_DIRECTORY'],f)
         # out=subprocess.run([f"tesseract uploads/{filename}"+f" textresult/{filename}"],shell=True,stdout=f1,stderr=f2)
