@@ -5,7 +5,7 @@ import os
 
 app=Flask(__name__)
 app.config['UPLOAD_DIRECTORY']="uploads"
-app.config['FILE_NAME']=""
+app.config['FILES_LIST']=[]
 app.config['OUTPUT_DIRECTORY']="textresult"
 # app.config['EXTENSION']=".txt"
 app.config['EXTENSION']="txt"
@@ -13,30 +13,35 @@ app.config['EXTENSION']="txt"
 @app.route("/",methods=["POST","GET"])
 def to_upload():
     err_msg=""
+    files_list=[]
     if request.method=="POST":
         if request.files['fileupload']:
-            f=request.files['fileupload']
-            filename=secure_filename(f.filename)
-            app.config['FILE_NAME']=filename
-            # f.save(app.config['UPLOAD_DIRECTORY']+filename)
-            f.save(os.path.join(app.config['UPLOAD_DIRECTORY'],filename))
-            return redirect(url_for("process_upload",filename=filename))
+            for f in request.files.getlist("fileupload"):
+            # f=request.files['fileupload']
+                file_name=secure_filename(f.filename)
+                files_list.append(file_name)
+                #app.config['FILE_NAME']=filename
+                # f.save(app.config['UPLOAD_DIRECTORY']+filename)
+                f.save(os.path.join(app.config['UPLOAD_DIRECTORY'],file_name))
+            app.config['FILES_LIST']=files_list
+            return redirect(url_for("process_upload",files_list=files_list))
         else:
             err_msg="No file selected!"
     return render_template("index.html",error=err_msg)
 
-@app.route("/upload/<filename>",methods=["POST","GET"])
-def process_upload(filename):
-    f1=open("logs/out.txt","w")
-    f2=open("logs/error.txt","w")
-    to_convert=os.path.join(app.config['UPLOAD_DIRECTORY'],filename)
-    convert2txt=os.path.join(app.config['OUTPUT_DIRECTORY'],filename)
-    # out=subprocess.run([f"tesseract uploads/{filename}"+f" textresult/{filename}"],shell=True,stdout=f1,stderr=f2)
-    if os.name=="nt": # If OS is windows-based-based
-        out=subprocess.run(["tesseract",to_convert,convert2txt],shell=True,stdout=f1,stderr=f2)
-    else: # Else, it might be linux or mac (posix)
-        #out=subprocess.run(["tesseract %s %s"%(to_convert,convert2txt)],shell=True,stdout=f1,stderr=f2)
-        out=subprocess.run(["tesseract",to_convert,convert2txt],stdout=f1,stderr=f2) # Omit 'shell=True' in LINUX/MAC systems
+@app.route("/upload/<files_list>",methods=["POST","GET"])
+def process_upload(files_list):
+    out_log=open("logs/out.txt","w")
+    err_log=open("logs/error.txt","w")
+    for f in files_list:
+        to_convert=os.path.join(app.config['UPLOAD_DIRECTORY'],f)
+        convert2txt=os.path.join(app.config['OUTPUT_DIRECTORY'],f)
+        # out=subprocess.run([f"tesseract uploads/{filename}"+f" textresult/{filename}"],shell=True,stdout=f1,stderr=f2)
+        if os.name=="nt": # If OS is windows-based-based
+            out=subprocess.run(["tesseract",to_convert,convert2txt],shell=True,stdout=out_log,stderr=err_log)
+        else: # Else, it might be linux or mac (posix)
+            #out=subprocess.run(["tesseract %s %s"%(to_convert,convert2txt)],shell=True,stdout=f1,stderr=f2)
+            out=subprocess.run(["tesseract",to_convert,convert2txt],stdout=out_log,stderr=err_log) # Omit 'shell=True' in LINUX/MAC systems
     return redirect(url_for("output_file"))
 
 @app.route("/result/",methods=["GET"])
