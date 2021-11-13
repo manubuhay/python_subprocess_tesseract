@@ -4,7 +4,9 @@ __pycache__/
 *$py.class
 textresult/*
 uploads/*
-logs/*.txt
+logs/
+logs/error.txt
+logs/out.txt
 # C extensions
 *.so
 
