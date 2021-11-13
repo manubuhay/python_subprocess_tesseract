@@ -3,10 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 textresult/*
-uploads/*
-logs/
-logs/error.txt
-logs/out.txt
 # C extensions
 *.so
 
