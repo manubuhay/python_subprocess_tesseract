@@ -27,6 +27,8 @@ def _zipoutputs():
             for file in files:
                 zippy.write(os.path.join(dirpath,file))
         zippy.close()
+    # Add this line to go back to project root directory
+    os.chdir("../")
 
 @app.route("/",methods=["POST","GET"])
 def to_upload():
@@ -60,7 +62,7 @@ def process_upload():
         to_convert=os.path.join(app.config['UPLOAD_DIR'],app.config["TEMP_DIR"],f)
         convert2txt=os.path.join(app.config['OUTPUT_DIR'],app.config["TEMP_DIR"],f)
         #out=subprocess.run([f"tesseract uploads/{filename}"+f" textresult/{filename}"],shell=True,stdout=f1,stderr=f2)
-        # If OS is windows-based-based
+        # If OS is windows-based
         if os.name=="nt": 
             out=subprocess.run(["tesseract",to_convert,convert2txt],shell=True,stdout=out_log,stderr=err_log)
         # Else, it might be linux or mac (posix)
