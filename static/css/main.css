@@ -9,9 +9,47 @@
 body {
   margin: 0;
   padding: 2rem 1.5rem;
-  font: 1rem/1.5 "PT Sans", Arial, sans-serif;
+  font: 2rem/1.5 "PT Sans", Arial, sans-serif;
   color: #5a5a5a;
 }
 .msg {
   color: rgb(200, 17, 15);
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  text-align: center;
+}
+.form1 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-right: 50px;
+  padding-left: 50px;
+  border-left: 150px solid indigo;
+  border-right: 150px solid indigo;
+  border-top: 100px solid indigo;
+  border-bottom: 100px solid indigo;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+input[type=reset] {
+  padding:5px;
+  margin:20px 10px 20px 10px;
+  font: 2rem/1.5 "PT Sans", Arial, sans-serif;
+
+}
+input[type=submit] {
+  padding:5px;
+  margin:10px 0;
+  font: 2rem/1.5 "PT Sans", Arial, sans-serif;
+  margin:20px 10px 20px 10px;
+}
+input[type=file] {
+  padding:20px;
+  margin:20px 0;
+  font: 2rem/1.5 "PT Sans", Arial, sans-serif;
+  margin:20px 10px 20px 10px;
 }
