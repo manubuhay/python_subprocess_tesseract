@@ -5,7 +5,6 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
   padding: 2rem 1.5rem;
@@ -52,7 +51,7 @@ input[type=file] {
   font: 2rem/1.5 "PT Sans", Arial, sans-serif;
   margin:20px 10px 20px 10px;
 }
-.btn {
+/* .btn {
   border-radius:0;
   padding: 14px 24px;
   border: 0 none;
@@ -64,20 +63,18 @@ input[type=file] {
 .btn:focus, .btn:active:focus, .btn.active:focus {
   outline: 0 none;
 }
-
 .btn-default {
   background: #0099cc;
   color: #ffffff;
 }
-
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
   background: #33a6cc;
 }
-
 .btn-default:active, .btn-default.active {
   background: #007299;
   box-shadow: none;
-}
+} */
+
 .output-wrapper {
   padding-top: 50px;
   padding-bottom: 50px;
@@ -92,4 +89,64 @@ input[type=file] {
   margin-top: 50px;
   margin-bottom: 50px;
   text-align: center;
+}
+
+/**************************
+  DEFAULT BOOTSTRAP STYLES
+**************************/
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 10px 16px;
+  min-width: 250px; /* Increase button width */
+}
+.btn-lg {
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+.btn-default {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  color: #fff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
+/***********************
+  RAISED BUTTONS
+************************/
+.btn-default.raised {
+  box-shadow: 0 3px 0 0 #007299;
+}
+.btn-default.raised {
+	box-shadow: 0 3px 0 0 #007299;
+}
+.btn-default.raised:active, .btn-default.raised.active {
+	background: #33a6cc;
+	box-shadow: none;
+	margin-bottom: -3px;
+	margin-top: 3px;
 }
