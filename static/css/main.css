@@ -39,7 +39,6 @@ input[type=reset] {
   padding:5px;
   margin:20px 10px 20px 10px;
   font: 2rem/1.5 "PT Sans", Arial, sans-serif;
-
 }
 input[type=submit] {
   padding:5px;
@@ -52,4 +51,45 @@ input[type=file] {
   margin:20px 0;
   font: 2rem/1.5 "PT Sans", Arial, sans-serif;
   margin:20px 10px 20px 10px;
+}
+.btn {
+  border-radius:0;
+  padding: 14px 24px;
+  border: 0 none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  min-width: 250px;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  outline: 0 none;
+}
+
+.btn-default {
+  background: #0099cc;
+  color: #ffffff;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+  background: #33a6cc;
+}
+
+.btn-default:active, .btn-default.active {
+  background: #007299;
+  box-shadow: none;
+}
+.output-wrapper {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-right: 50px;
+  padding-left: 50px;
+  border-left: 150px solid rgb(0, 85, 130);
+  border-right: 150px solid rgb(0, 85, 130);
+  border-top: 100px solid rgb(0, 85, 130);
+  border-bottom: 100px solid rgb(0, 85, 130);
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
 }

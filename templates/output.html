@@ -1,7 +1,9 @@
 {%extends 'base.html'%}
 {%block title%}Output{%endblock%}
 {%block main%}
-<h2>Download File:</h2>
-<a href="{{url_for('download_file')}}" target="blank"><button class="btn btn-default">Download</button></a><br><br><br>
-<a href="{{url_for('to_upload')}}" target="blank">Convert Again?</a>
+<div class="output-wrapper">
+    <h2>Download File:</h2>
+    <a href="{{url_for('download_file')}}" target="blank"><button class="btn btn-default">Download</button></a><br><br><br>
+    <a href="{{url_for('to_upload')}}" target="blank">Convert Again?</a>
+</div>
 {%endblock%}
