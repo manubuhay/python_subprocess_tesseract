@@ -1,1 +1,4 @@
 Tesseract Open Source OCR Engine v4.1.1 with Leptonica
+Error, cannot read input file uploads/nIaVG/IMG_20240109_122938.jpg: No such file or directory
+Error during processing.
+Tesseract Open Source OCR Engine v4.1.1 with Leptonica
