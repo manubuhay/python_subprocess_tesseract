@@ -4,6 +4,7 @@ import subprocess
 import os
 import random,string
 from zipfile import ZipFile
+import shutil
 
 app=Flask(__name__)
 app.config["UPLOAD_DIR"]="uploads"
@@ -71,6 +72,10 @@ def process_upload():
             # Omit 'shell=True' in LINUX/MAC systems
             out=subprocess.run(["tesseract",to_convert,convert2txt],stdout=out_log,stderr=err_log)
     _zipoutputs()
+    #Remove uploaded images to save space
+    shutil.rmtree(os.path.join(app.config['UPLOAD_DIR'],app.config["TEMP_DIR"]))
+    #Reset file list to exclude file names previously converted to text when converting next batch
+    app.config["FILES_LIST"]=[]
     return redirect(url_for("output_file"))
 
 @app.route("/result/",methods=["GET"])
